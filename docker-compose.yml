@@ -1,0 +1,34 @@
+services:
+  backend:
+    build:
+      context: ./port_finder_backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./port_finder_backend:/usr/src/app
+    environment:
+      NODE_ENV: development
+      PORT: 5000
+    depends_on:
+      - database
+
+  client:
+    build:
+      context: ./port_finder_client
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    environment:
+      NODE_ENV: production
+
+  database:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+volumes:
+  mongo-data:
