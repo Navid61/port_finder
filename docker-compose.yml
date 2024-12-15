@@ -1,4 +1,21 @@
+version: '3.9'
+
 services:
+  database:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017" # Only needed if you want to access from the host machine
+    volumes:
+      - mongo-data:/data/db
+    healthcheck:
+      test: ["CMD-SHELL", "mongosh --eval 'db.adminCommand(\"ping\")' --quiet || exit 1"] # Corrected healthcheck
+      interval: 10s
+      timeout: 5s
+      retries: 12
+    environment:
+      MONGO_INITDB_DATABASE: ports
+
   backend:
     build:
       context: ./port_finder_backend
@@ -6,12 +23,14 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./port_finder_backend:/usr/src/app
+      - ./data:/usr/src/app/data:ro # Correctly mount the CSV file here
     environment:
       NODE_ENV: development
       PORT: 5000
+      MONGO_URI: mongodb://mongo:27017/ports
     depends_on:
-      - database
+      database:
+        condition: service_healthy
 
   client:
     build:
@@ -21,14 +40,6 @@ services:
       - "3000:80"
     environment:
       NODE_ENV: production
-
-  database:
-    image: mongo
-    container_name: mongo
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongo-data:/data/db
 
 volumes:
   mongo-data:
