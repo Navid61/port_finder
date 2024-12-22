@@ -1,6 +1,6 @@
 [submodule "port_finder_backend"]
 	path = port_finder_backend
-	url = git@github.com:Navid61/port_finder_backend.git
+	url = https://github.com/Navid61/port_finder_backend.git
 [submodule "port_finder_client"]
 	path = port_finder_client
-	url = git@github.com:Navid61/port_finder_client.git
+	url = https://github.com/Navid61/port_finder_client.git
