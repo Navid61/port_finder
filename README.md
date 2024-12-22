@@ -36,5 +36,7 @@
    - If you encounter any issues during setup or while running the application, feel free to reach out for help.
 
 ### Additional Notes
-- All repositories are in the `dev` branch.
 
+- To run the program in the **stable version**, ensure all three repositories are switched to the `main` branch. Then, run `git pull` in each repository to ensure you have access to the latest updates.
+
+- To run the program in **development mode**, ensure all repositories are switched to the `dev` branch. Then, run `git pull` in each repository to fetch the latest updates.
