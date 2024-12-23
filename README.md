@@ -5,7 +5,7 @@
 1. **Clone the Repository**:
    - Use the following command to clone the `port_finder` repository:
      ```bash
-     git clone git@github.com:Navid61/port_finder.git
+     git clone --recurse-submodules git@github.com:Navid61/port_finder.git
      ```
 
 2. **Check Folder Permissions**:
